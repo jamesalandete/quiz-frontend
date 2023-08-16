@@ -1,0 +1,83 @@
+.step-page {
+  justify-content: center;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.step-container {
+  /* flex: 4; */
+  margin-right: 20px;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.step-container h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.step-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.step-container label {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.step-container label input[type="radio"] {
+  margin-right: 10px;
+  color: #007bff;
+  background-color: #007bff;
+}
+
+.button-container {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-prev{
+  flex: 5;
+  justify-content: flex-start;
+}
+.btn-next{
+  justify-content: flex-end;
+}
+
+.correct-option{
+  background-color: rgb(83, 219, 119) !important;
+}
+
+.selected-option{
+  border: 2px solid #007bff;
+}

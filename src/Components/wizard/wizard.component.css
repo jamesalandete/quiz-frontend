@@ -1,0 +1,45 @@
+/* Agrega estos estilos en tu archivo CSS */
+body {
+  background: none !important;
+  font-family: 'Rubik', sans-serif;
+}
+
+.wizard-container{
+  margin-top: 50px;
+}
+
+.progress-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-bar {
+  width: 80%;
+  height: 20px;
+  background-color: #ccc;
+  margin-bottom: 20px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #40c577;
+  transition: width 0.3s ease-in-out;
+}
+
+
+.score {
+  font-size: 36px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.score-description{
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 20px;
+  text-align: center;
+}
