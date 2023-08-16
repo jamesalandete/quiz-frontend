@@ -12,3 +12,7 @@ export async function answerUser(form: IAnswerUser) {
 export async function validateAnswers(user_id: number) {
   return await axios.post(`private/user-answers/score`, {user_id});
 }
+
+export async function scoreUser(user_id: number) {
+  return await axios.get(`private/user-answers/user-score/${user_id}`);
+}
