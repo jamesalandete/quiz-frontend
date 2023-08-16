@@ -13,29 +13,45 @@ const Wizard = () => {
   const [showModal, setShowModal] = useState(false)
   const [score, setScore] = useState(0)
 
+  // -----> Function contadora hacia adelante
   const handleNextStep = () => {
     setCurrentStep(currentStep + 1);
   };
-
+  // -----> Function contadora hacia atras
   const handlePrevStep = () => {
     setCurrentStep(currentStep - 1);
   };
-
+  // -----> Function recibe si termino el quiz
   const handleSendAnswer = (score: number) => {
     setScore(score)
     setAnswerSend(true);
     setShowModal(true)
   };
-
+  // -----> Recibe si se dio cerrar modal y cambia estado
   const closeModal = () => {
     setShowModal(false)
   }
-
+  // -----> Contador pasos
   const progress = answerSend
     ? 100
     : ((currentStep + 1) / (steps ? steps.length : 1)) * 100;
 
   useEffect(() => {
+    // -----> Consultar informacion para saber si el usuario ya termino quiz
+    let infoUser: any = localStorage!.getItem('userProfile')
+    if(infoUser) infoUser = JSON.parse(infoUser)
+    const userScore = async () => {
+      try {
+        const dataScore = await serviceQuestion.scoreUser(infoUser?.user?.id);
+        if(dataScore.length > 0){
+          localStorage.setItem('answerUser', JSON.stringify(dataScore?.UserAnswwer))
+          localStorage.setItem('userAnswerValidate', JSON.stringify(dataScore?.score))
+        }
+      } catch (error) {
+        console.error('Error data score:', error);
+      }
+    };
+    // -----> Obtener todas las question
     const fetchSteps = async () => {
       try {
         const fetchedSteps = await serviceQuestion.questions();
@@ -44,12 +60,13 @@ const Wizard = () => {
         console.error('Error fetching steps:', error);
       }
     };
+    userScore();
     fetchSteps();
   }, []);
 
   return (
     <>
-      <Header />
+      <Header answerSend={handleSendAnswer} />
       <div className='wizard-container'>
         <div className='progress-bar-container'>
           <div className='progress-bar'>

@@ -25,10 +25,12 @@ const Step: React.FC<StepProps> = ({
   const [answered, setAnswered] = useState(false);
   const [userId, setUserId] = useState(0);
 
+  // -----> Optiene opcion seleccionada
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(Number(event.target.value));
   };
 
+  // ----->Envia culmino el quiz
   const handleSubmit = async () => {
     try {
       const resp = await saveAnswer()
@@ -42,6 +44,7 @@ const Step: React.FC<StepProps> = ({
     }
   };
 
+  // -----> Guarda informacion al presionar siguiente y enviar contador al padre component
   const handleNext = async () => {
     try {
       const resp = await saveAnswer()
@@ -53,7 +56,7 @@ const Step: React.FC<StepProps> = ({
       toast.error('Se presento un error al actualizar')
     }
   };
-
+  // -----> Metodo para guardar cada opcion
   const saveAnswer = async () => {
     if(answered) return true
     let info: any = localStorage?.getItem('userProfile')
@@ -80,7 +83,7 @@ const Step: React.FC<StepProps> = ({
       toast.error('Se presento un error al actualizar')
     }
   }
-
+  // -----> Funcion para mostrar las correctas
   const validateAnswer = (option: number) => {
     let validate: any = localStorage?.getItem('userAnswerValidate')
     let  correct = 0
@@ -92,9 +95,19 @@ const Step: React.FC<StepProps> = ({
     return correct == option
   }
 
+  useEffect(()=> {
+    // -----> Detesta si existe un score ya de este quiz
+    let score: any = localStorage?.getItem('userAnswerValidate')
+    if(score != undefined && score != 'undefined'){
+      score = JSON.parse(score)
+      setAnswered(true)
+      answerSend(score.score)
+    }
+  }, [!answered])
+
   useEffect(() => {
     let info: any = localStorage?.getItem('answerUser')
-    if (info) {
+    if(info != undefined && info != 'undefined'){
       info = JSON.parse(info);
       const resp = info.find((sel: any) => sel?.question_id === question?.id);
       if (resp) {
